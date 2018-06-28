@@ -21,10 +21,10 @@ class rss(object):
         tags = ["<title>", "<description>", "<pubDate>"]
         for j in tags:
             self.read(j)
-        
+
         x = 0
         y = int( (len(self.liste)+1)/3-1 )
-        z = int( len(self.liste) )
+        z = int( len(self.liste) ) -1
 
         for index in range(x, y+1):
             print (index, y+index+1, z-y+index )
@@ -32,7 +32,7 @@ class rss(object):
             "description":self.liste[y+index+1], 
             "test":self.liste[z-y+index]}
 
-        return self.news, z
+        return x, y, z
 
 
 beta = rss()
