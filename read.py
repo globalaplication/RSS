@@ -4,11 +4,10 @@
 import urllib.request
 
 class rss(object):
-    def __init__(self):
-        self.news = {}
-        self.liste = []
-    def source(self, url="http://www.haberturk.com/rss/spor.xml"):
-        s=urllib.request.urlopen(url)
+    def __init__(self, url="http://www.haberturk.com/rss/spor.xml"):
+        self.news, self.liste, self.url = {}, [], url
+    def source(self):
+        s=urllib.request.urlopen(self.url)
         return s.read().splitlines()
     def read(self, tag="<title>"):
         for j in self.source():
@@ -17,21 +16,16 @@ class rss(object):
                 j = j.replace("[","")
                 j = j[j.find("!CDATA")+len("!CDATA"):].split("]]")[0]
                 self.liste.append(j)
-    def get(self):
+    def get(self, x=0):
         tags = ["<title>", "<description>", "<pubDate>"]
         for j in tags:
             self.read(j)
-
-        x = 0
         y = int( (len(self.liste)+1)/3-1 )
         z = int( len(self.liste) ) -1
-
         for index in range(x, y+1):
-            #print (index, y+index+1, z-y+index )
             self.news[index] = {"title":self.liste[index],
             "description":self.liste[y+index], 
             "test":self.liste[z-y+index]}
-
         return self.news
 
 
