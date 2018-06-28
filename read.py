@@ -27,12 +27,12 @@ class rss(object):
         z = int( len(self.liste) ) -1
 
         for index in range(x, y+1):
-            print (index, y+index+1, z-y+index )
+            #print (index, y+index+1, z-y+index )
             self.news[index] = {"title":self.liste[index],
-            "description":self.liste[y+index+1], 
+            "description":self.liste[y+index], 
             "test":self.liste[z-y+index]}
 
-        return x, y, z
+        return self.news
 
 
 beta = rss()
